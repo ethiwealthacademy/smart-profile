@@ -1,27 +1,40 @@
- name: Update Smart Profile Content
- on:
- schedule:- cron: '0 */6 * * *' # every 6 hours
- workflow_dispatch: {}
- jobs:
- build:
- runs-on: ubuntu-latest
- steps:- name: Checkout
- uses: actions/checkout@v4- name: Use Node
- uses: actions/setup-node@v4
- with:
- node-version: '20'- name: Run fetch script
- env:
- YOUTUBE_API_KEY: ${{ secrets.YOUTUBE_API_KEY }}
- YOUTUBE_CHANNEL_ID: ${{ secrets.YOUTUBE_CHANNEL_ID }}
- INSTAGRAM_TOKEN: ${{ secrets.INSTAGRAM_TOKEN }}
- OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
- BRAND_NAME: ${{ secrets.BRAND_NAME }}
- AUDIENCE: ${{ secrets.AUDIENCE }}
- OFFER_BASELINE: ${{ secrets.OFFER_BASELINE }}
- run: node scripts/fetch_content.mjs- name: Commit changes
- run: |
- git config user.name github-actions
- git config user.email actions@github.com
- git add content/content.json
- git commit -m "Update content [skip ci]" || echo "No changes"
- git push
+name: Update Smart Profile Content
+
+on:
+  schedule:
+    - cron: '0 */6 * * *'   # every 6 hours
+  workflow_dispatch:        # allow manual runs
+
+permissions:
+  contents: write           # allow this workflow to commit/push
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Run fetch script
+        env:
+          YOUTUBE_API_KEY: ${{ secrets.YOUTUBE_API_KEY }}
+          YOUTUBE_CHANNEL_ID: ${{ secrets.YOUTUBE_CHANNEL_ID }}
+          INSTAGRAM_TOKEN: ${{ secrets.INSTAGRAM_TOKEN }}
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+          BRAND_NAME: ${{ secrets.BRAND_NAME }}
+          AUDIENCE: ${{ secrets.AUDIENCE }}
+          OFFER_BASELINE: ${{ secrets.OFFER_BASELINE }}
+        run: node scripts/fetch_content.mjs
+
+      - name: Commit changes
+        run: |
+          git config user.name github-actions
+          git config user.email actions@github.com
+          git add content/content.json
+          git commit -m "Update content [skip ci]" || echo "No changes"
+          git push
