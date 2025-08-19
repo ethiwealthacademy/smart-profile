@@ -20,13 +20,13 @@ jobs:
         with:
           node-version: '20'
 
-      # Optional: sanity check that required secrets exist
+      # Sanity check that required secrets exist
       - name: Check env
         run: |
           [ -n "${{ secrets.YOUTUBE_API_KEY }}" ] && echo "YOUTUBE_API_KEY: set" || (echo "YOUTUBE_API_KEY: MISSING" && exit 1)
           [ -n "${{ secrets.YOUTUBE_CHANNEL_ID }}" ] && echo "YOUTUBE_CHANNEL_ID: set" || (echo "YOUTUBE_CHANNEL_ID: MISSING" && exit 1)
 
-      - name: Run fetch script
+      - name: Run fetch script (with debug)
         env:
           YOUTUBE_API_KEY: ${{ secrets.YOUTUBE_API_KEY }}
           YOUTUBE_CHANNEL_ID: ${{ secrets.YOUTUBE_CHANNEL_ID }}
@@ -35,12 +35,25 @@ jobs:
           BRAND_NAME: ${{ secrets.BRAND_NAME }}
           AUDIENCE: ${{ secrets.AUDIENCE }}
           OFFER_BASELINE: ${{ secrets.OFFER_BASELINE }}
-        run: node scripts/fetch_content.mjs
+        run: |
+          node --version
+          echo "Running fetch_content.mjs…"
+          node scripts/fetch_content.mjs || true
+          echo "Exit code ignored above so we can inspect files."
+
+      - name: Show generated JSON (if any)
+        run: |
+          echo "Listing docs/content:"
+          ls -la docs/content || true
+          echo "----- content.json -----"
+          cat docs/content/content.json || true
+          echo "------------------------"
 
       - name: Commit changes
         run: |
           git config user.name github-actions
           git config user.email actions@github.com
           git add docs/content/content.json
+          git status
           git commit -m "Update content [skip ci]" || echo "No changes"
-          git push
+          git push || true
