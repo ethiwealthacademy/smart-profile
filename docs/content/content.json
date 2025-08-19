@@ -1,12 +1,32 @@
 {
- 
- "brand": "Your Brand",
- "audience": "general audience",
- "updatedAt": "",
- "headline": "Loading your smart profile…",
- "offer": "",
- "youtube": null,
- "instagram": null,
- "buttons": [],
- "contact": []
+  "brand": "My Brand",
+  "audience": "general audience",
+  "updatedAt": "2025-08-19T20:35:37.683Z",
+  "headline": "My Brand — 🌱🪴🌳 Learn and grow #ethicalinvesting #FinEd #wealthbuilding",
+  "offer": "Check out my latest!",
+  "youtube": {
+    "platform": "youtube",
+    "videoId": "l5diHJFJgPM",
+    "title": "🌱🪴🌳 Learn and grow #ethicalinvesting #FinEd #wealthbuilding",
+    "publishedAt": "2025-07-21T14:28:43Z",
+    "url": "https://www.youtube.com/watch?v=l5diHJFJgPM",
+    "thumbnail": "https://i.ytimg.com/vi/l5diHJFJgPM/hqdefault.jpg"
+  },
+  "instagram": null,
+  "buttons": [
+    {
+      "label": "YouTube",
+      "href": "https://www.youtube.com/watch?v=l5diHJFJgPM"
+    }
+  ],
+  "contact": [
+    {
+      "label": "WhatsApp",
+      "href": "https://wa.me/9665XXXXXXXX"
+    },
+    {
+      "label": "Email",
+      "href": "mailto:you@example.com"
+    }
+  ]
 }
