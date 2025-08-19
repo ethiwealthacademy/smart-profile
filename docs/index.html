@@ -55,7 +55,7 @@ content:center;padding:12px 16px;border-radius:
  <script>
     (async function(){
  async function load() {
- const res = await fetch('../content/content.json?_=' + Date.now());
+ const res = await fetch('content/content.json?_=' + Date.now());
  const data = await res.json();
  document.title = (data.brand || 'Smart Profile') + ' — Smart 
 Profile';
