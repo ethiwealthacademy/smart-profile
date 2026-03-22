@@ -1,12 +1,24 @@
 {
   "brand": "My Brand",
   "audience": "general audience",
-  "updatedAt": "2026-03-22T13:03:57.531Z",
-  "headline": "My Brand — Check out my latest!",
+  "updatedAt": "2026-03-22T18:46:07.254Z",
+  "headline": "My Brand — ZM went up by 12% in a single day. Chart posted a month ago in our instagram pa",
   "offer": "Check out my latest!",
-  "youtube": null,
+  "youtube": {
+    "platform": "youtube",
+    "videoId": "yXX38O4otrY",
+    "title": "ZM went up by 12% in a single day. Chart posted a month ago in our instagram page",
+    "publishedAt": "2025-08-24T18:33:19Z",
+    "url": "https://www.youtube.com/watch?v=yXX38O4otrY",
+    "thumbnail": "https://i.ytimg.com/vi/yXX38O4otrY/hqdefault.jpg"
+  },
   "instagram": null,
-  "buttons": [],
+  "buttons": [
+    {
+      "label": "YouTube",
+      "href": "https://www.youtube.com/watch?v=yXX38O4otrY"
+    }
+  ],
   "contact": [
     {
       "label": "WhatsApp",
